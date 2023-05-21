@@ -129,7 +129,7 @@ void generatePdf(Polygon& A) {
 	double maxX = minX;
 	double minY = A.arr[0].getY();
 	double maxY = minY;
-	for (unsigned int i = 1; i < A.getN(); i++) {
+	for (int i = 1; i < A.getN(); i++) {
 		double x = A.arr[i].getX();
 		double y = A.arr[i].getY();
 		minX = min(minX, x);
@@ -156,7 +156,7 @@ void generatePdf(Polygon& A) {
 	file << "<< /Length 61 >>\n";
 	file << "stream\n";
 
-	for (unsigned int i = 0; i < A.getN(); i++) {
+	for (int i = 0; i < A.getN(); i++) {
 		file << (margin + (A.arr[i].getX() - minX) * scaleFactor) << " " << (margin + (A.arr[i].getY() - minY) * scaleFactor) << (i == 0 ? " m\n" : " l\n");
 	}
 
@@ -168,10 +168,8 @@ void generatePdf(Polygon& A) {
 	file.close();
 
 	string openCommand = "start";
-	if (!openCommand.empty()) {
-		string command = openCommand + " " + "pointFigura.pdf";
-		system(command.c_str());
-	}
+	string command = openCommand + " " + "pointFigura.pdf";
+	system(command.c_str());
 }
 
 int main(int argc, char** argv) {
